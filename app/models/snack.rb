@@ -6,4 +6,8 @@ class Snack < ApplicationRecord
   def formatted_price
     '%.2f' % price.to_f.round(2)
   end
+
+  def locations
+    machines.pluck(:location)
+  end
 end

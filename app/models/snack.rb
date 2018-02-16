@@ -4,6 +4,6 @@ class Snack < ApplicationRecord
   has_many :machines, through: :machine_snacks
 
   def formatted_price
-    '%.2f' % price
+    '%.2f' % price.to_f.round(2)
   end
 end

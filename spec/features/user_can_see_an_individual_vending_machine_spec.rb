@@ -4,7 +4,6 @@ feature 'When a user visits a vending machine show page' do
   before(:each) do
     @owner = Owner.create(name: "Sam's Snacks")
     @dons  = @owner.machines.create(location: "Don's Mixed Drinks")
-    @snack = Snack.create(name: 'snickers')
   end
   scenario 'they see the location of that machine' do
 
@@ -14,6 +13,11 @@ feature 'When a user visits a vending machine show page' do
   end
 
   scenario 'they see the names of all the snacks associated with that machine and their price' do
-    
+    @dons.snacks.create(name: 'snickers', price: 2.50)
+
+    visit machine_path(@dons)
+
+    expect(page).to have_content('snickers')
+    expect(page).to have_content('$2.50')
   end
 end
